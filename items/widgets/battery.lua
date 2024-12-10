@@ -68,7 +68,7 @@ battery:subscribe({"routine", "power_source_change", "system_woke"}, function()
 
     local lead = ""
     if found and charge < 10 then
-      lead = "0"
+      --lead = "0"
     end
 
     battery:set({

@@ -74,16 +74,14 @@ volume_percent:subscribe("volume_change", function(env)
     icon = icons.volume._100
   elseif volume > 30 then
     icon = icons.volume._66
-  elseif volume > 10 then
-    icon = icons.volume._33
   elseif volume > 0 then
-    icon = icons.volume._10
+    icon = icons.volume._33
   end
 
   local lead = ""
-  if volume < 10 then
-    lead = "0"
-  end
+  --if volume < 10 then
+    --lead = "0"
+  --end 
 
   volume_icon:set({ label = icon })
   volume_percent:set({ label = lead .. volume .. "%" })
