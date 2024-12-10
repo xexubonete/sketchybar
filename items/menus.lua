@@ -16,13 +16,14 @@ local max_items = 15
 local menu_items = {}
 for i = 1, max_items, 1 do
   local menu = sbar.add("item", "menu." .. i, {
-    padding_left = settings.paddings,
-    padding_right = settings.paddings,
+    padding_left = 0,
+    padding_right = 0,
     drawing = false,
     icon = { drawing = false },
     label = {
       font = {
-        style = settings.font.style_map[i == 1 and "Heavy" or "Semibold"]
+        style = settings.font.style_map[i == 1 and "Heavy" or "Semibold"],
+        size = 10
       },
       padding_left = 6,
       padding_right = 6,

@@ -157,7 +157,7 @@ spaces_indicator:subscribe("mouse.entered", function(env)
         border_color = { alpha = 1.0 },
       },
       icon = { color = colors.bg1 },
-      label = { width = "dynamic" }
+      label = { width = 0 }
     })
   end)
 end)
