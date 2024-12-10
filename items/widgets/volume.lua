@@ -70,9 +70,9 @@ local volume_slider = sbar.add("slider", popup_width, {
 volume_percent:subscribe("volume_change", function(env)
   local volume = tonumber(env.INFO)
   local icon = icons.volume._0
-  if volume > 60 then
+  if volume > 59 then
     icon = icons.volume._100
-  elseif volume > 30 then
+  elseif volume > 29 then
     icon = icons.volume._66
   elseif volume > 0 then
     icon = icons.volume._33
