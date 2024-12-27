@@ -19,6 +19,12 @@ disk_usage:subscribe('system_stats', function(env)
     -- Capture system stats from the environment
     local network_rx = env.NETWORK_RX_en0 or "N/A"
     local network_tx = env.NETWORK_TX_en0 or "N/A"
+    
+    sbar.exec("ipconfig getifaddr en0; ipconfig getifaddr en6", function(ip, ipRemote)
+        local connected = not (ip == "") and (ipRemote == "")
+        network_rx = env.NETWORK_TX_en6 or "N/A"
+        network_tx = env.NETWORK_TX_en6 or "N/A"
+    end)
     local cpu_temp = env.CPU_TEMP or "N/A"
     local ram_used = env.RAM_USED or "N/A"
 
