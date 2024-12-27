@@ -42,7 +42,7 @@ os.execute([[
     killall stats_provider
     # Update with path to stats_provider and invoke CLI for your desired stats
     # This example will send cpu, disk, and ram usage percentages
-    $CONFIG_DIR/sketchybar-system-stats/target/release/stats_provider --cpu temperature usage --memory ram_used ram_total --disk used total --network en0 --interval 1 &
+    $CONFIG_DIR/sketchybar-system-stats/target/release/stats_provider --cpu temperature usage --memory ram_used ram_total --disk used total --network en0 en6 --interval 1 &
     sketchybar --add item disk_usage right \
                --set disk_usage script="sketchybar --set disk_usage label=\$DISK_USAGE" \
                --subscribe disk_usage system_stats

@@ -178,8 +178,8 @@ wifi_up:subscribe("network_update", function(env)
 end)
 
 wifi:subscribe({"wifi_change", "system_woke"}, function(env)
-  sbar.exec("ipconfig getifaddr en0", function(ip)
-    local connected = not (ip == "")
+  sbar.exec("ipconfig getifaddr en0; ipconfig getifaddr en6", function(ip, ipRemote)
+    local connected = not (ip == "") and not (ipRemote == "")
     wifi:set({
       icon = {
         string = connected and icons.wifi.connected or icons.wifi.disconnected,
