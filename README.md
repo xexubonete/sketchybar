@@ -38,9 +38,9 @@ brew install sketchybar
 cp -r sketchybar-lua/src ~/.config/sketchybar
 ```
 
-// ... existing code ...
-
 ## 📁 Project Structure
+
+```
 ├── README.md
 ├── bar.lua
 ├── colors.lua
@@ -89,6 +89,7 @@ cp -r sketchybar-lua/src ~/.config/sketchybar
 │       └── wifi.lua
 ├── settings.lua
 └── sketchybarrc
+```
 
 ## 🔧 Customization
 
