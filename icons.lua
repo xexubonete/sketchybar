@@ -8,6 +8,7 @@ local icons = {
     gear = "􀍟",
     cpu = "􀫥",
     clipboard = "􀉄",
+    brightness = "􀆭",
 
     switch = {
       on = "􁏮",
@@ -44,12 +45,8 @@ local icons = {
 
   -- Alternative NerdFont icons
   nerdfont = {
-    plus = "",
-    loading = "",
-    apple = "",
-    gear = "",
-    cpu = "",
     clipboard = "Missing Icon",
+    brightness = "",
 
     switch = {
       on = "󱨥",
