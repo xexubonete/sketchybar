@@ -8,7 +8,7 @@ local cal = sbar.add("item", {
   icon = {
     color = colors.white,
     padding_left = 1,
-    padding_right = -11,
+    padding_right = -1,
     font = {
       style = settings.font.style_map["Bold"],
       size = 10.0,
@@ -16,7 +16,7 @@ local cal = sbar.add("item", {
   },
   label = {
     color = colors.white,
-    padding_right = 5,
+    padding_right = 15,
     width = 49,
     align = "right",
     font = { family = settings.font.numbers, size = 10 },
