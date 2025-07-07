@@ -22,7 +22,7 @@ local cal = sbar.add("item", {
     font = { family = settings.font.numbers, size = 10 },
   },
   position = "right",
-  update_freq = 30,
+  update_freq = 2,
   padding_left = 1,
   padding_right = 0,
   background = {

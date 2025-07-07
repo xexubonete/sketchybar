@@ -12,7 +12,7 @@ local battery = sbar.add("item", "widgets.battery", {
     padding_right = -1
   },
   label = { font = { family = settings.font.numbers, size = 10 } },
-  update_freq = 90,
+  update_freq = 2,
   popup = { align = "center" }
 })
 
@@ -30,54 +30,61 @@ local remaining_time = sbar.add("item", {
   },
 })
 
-
 battery:subscribe({"routine", "power_source_change", "system_woke"}, function()
   sbar.exec("pmset -g batt", function(batt_info)
-    local icon = "!"
-    local label = "?"
+    sbar.exec("pmset -g | grep lowpowermode", function(lpm_info)
+      local icon = "!"
+      local label = "?"
 
-    local found, _, charge = batt_info:find("(%d+)%%")
-    if found then
-      charge = tonumber(charge)
-      label = charge .. "%"
-    end
-
-    local color = colors.green
-    local charging, _, _ = batt_info:find("AC Power")
-
-    if charging then
-      icon = icons.battery.charging
-    else
-      if found and charge > 79 then
-        icon = icons.battery._100
-      elseif found and charge > 59 then
-        icon = icons.battery._75
-      elseif found and charge > 29 then
-        icon = icons.battery._50
-      elseif found and charge > 9 then
-        icon = icons.battery._25
-        color = colors.orange
-      elseif found and charge > 0 then
-        icon = icons.battery._0
-        color = colors.red
-      else
-        icon = icons.battery._0
-        color = colors.red
+      local found, _, charge = batt_info:find("(%d+)%%")
+      if found then
+        charge = tonumber(charge)
+        label = charge .. "%"
       end
-    end
 
-    local lead = ""
-    if found and charge < 10 then
-      --lead = "0"
-    end
+      local color = colors.green
+      local charging, _, _ = batt_info:find("AC Power")
 
-    battery:set({
-      icon = {
-        string = icon,
-        color = color
-      },
-      label = { string = lead .. label },
-    })
+      local low_power = lpm_info:find("1")
+      if low_power then
+        color = colors.yellow
+        label = label
+      end
+
+      if charging then
+        icon = icons.battery.charging
+      else
+        if found and charge > 79 then
+          icon = icons.battery._100
+        elseif found and charge > 59 then
+          icon = icons.battery._75
+        elseif found and charge > 29 then
+          icon = icons.battery._50
+        elseif found and charge > 9 then
+          icon = icons.battery._25
+          color = colors.red
+        elseif found and charge > 0 then
+          icon = icons.battery._0
+          color = colors.red
+        else
+          icon = icons.battery._0
+          color = colors.red
+        end
+      end
+
+      local lead = ""
+      if found and charge < 10 then
+        --lead = "0"
+      end
+
+      battery:set({
+        icon = {
+          string = icon,
+          color = color
+        },
+        label = { string = lead .. label },
+      })
+    end)
   end)
 end)
 
