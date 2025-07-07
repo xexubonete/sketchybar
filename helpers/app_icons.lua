@@ -310,4 +310,20 @@ return {
 	["zoom.us"] = ":zoom:",
 	["Zotero"] = ":zotero:",
 	["Zulip"] = ":zulip:",
+	
+	--Apps in spanish
+	["Contactos"] = ":messages:",
+	["Utilidad de Discos"] = ":gear:",
+	["Monitor de Actividad"] = ":gear:",
+	["FaceTime"] = ":face_time:",
+	["Fotos"] = ":affinity_photo_2:",
+	["Libros"] = ":book:",
+	["Vista Previa"] = ":pdf:",
+	["Mensajes"] = ":messages:",
+	["Recordatorios"] = ":reminders:",
+	["Notas"] = ":notes:",
+	["Calendario"] = ":calendar:",
+	["Música"] = ":music:",
+	["Ajustes del Sistema"] = ":gear:",
+	["Preferencias del Sistema"] = ":gear:",
 }

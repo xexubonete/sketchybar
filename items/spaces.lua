@@ -130,14 +130,14 @@ space_window_observer:subscribe("space_windows_change", function(env)
   local no_app = true
   for app, count in pairs(env.INFO.apps) do
     no_app = false
-    local lookup = app_icons[app]
-    local icon = ((lookup == nil) and app_icons["Default"] or lookup)
+    local icon = app_icons[app] or app_icons["Default"]
     icon_line = icon_line .. icon
   end
 
-  if (no_app) then
+  if no_app then
     icon_line = ""
   end
+
   sbar.animate("tanh", 10, function()
     spaces[env.INFO.space]:set({ label = icon_line })
   end)
