@@ -291,7 +291,7 @@ return {
 	["VLC"] = ":vlc:",
 	["VMware Fusion"] = ":vmware_fusion:",
 	["VSCodium"] = ":vscodium:",
-	["Warp"] = ":warp:",
+	["Warp"] = ":terminal:",
 	["WebStorm"] = ":web_storm:",
 	["微信"] = ":wechat:",
 	["WeChat"] = ":wechat:",
