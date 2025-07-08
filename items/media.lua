@@ -138,9 +138,7 @@ end
 -- Music events
 music_cover:subscribe("media_change", function(env)
   local app = env.INFO.app
-  if not app or app ~= "Música" then return end
-
-  local drawing = (env.INFO.state == "playing")
+  if not app or (app ~= "Música" and app ~= "Music") then return end  local drawing = (env.INFO.state == "playing")
   music_artist:set({ drawing = drawing, label = env.INFO.artist or app })
   music_title:set({ drawing = drawing, label = env.INFO.title or "Playing" })
   music_cover:set({ drawing = drawing })
@@ -157,8 +155,7 @@ end)
 -- Other media events
 other_cover:subscribe("media_change", function(env)
   local app = env.INFO.app
-  if not app or app == "Música" then return end
-
+  if not app or (app == "Música" or app == "Music") then return end
   local drawing = (env.INFO.state == "playing")
   other_artist:set({ drawing = drawing, label = env.INFO.artist or app })
   other_title:set({ drawing = drawing, label = env.INFO.title or "Playing" })
