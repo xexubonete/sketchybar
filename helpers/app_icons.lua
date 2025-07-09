@@ -313,6 +313,7 @@ return {
 	
 	--Apps in spanish
 	["Contactos"] = ":messages:",
+	["Perplexity"] = ":openai:",
 	["Utilidad de Discos"] = ":gear:",
 	["Monitor de Actividad"] = ":gear:",
 	["FaceTime"] = ":face_time:",
