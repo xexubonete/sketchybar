@@ -315,6 +315,7 @@ return {
 	["Contactos"] = ":messages:",
 	["Perplexity"] = ":openai:",
 	["Utilidad de Discos"] = ":gear:",
+	["Información del Sistema"] = ":gear:",
 	["Monitor de Actividad"] = ":gear:",
 	["FaceTime"] = ":face_time:",
 	["Fotos"] = ":affinity_photo_2:",
