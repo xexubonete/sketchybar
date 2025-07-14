@@ -42,19 +42,30 @@ local interrupt = { music = 0 }
 local function animate_music_detail(detail)
   if (not detail) then interrupt.music = interrupt.music - 1 end
   if interrupt.music > 0 and (not detail) then
-    print("[DEBUG] Animation interrupted, skipping animation step")
     return
   end
 
-  print("[DEBUG] Animating music detail, drawing:", tostring(detail))
   sbar.animate("tanh", 20, function()
     music_artist:set({ label = { width = detail and "dynamic" or 0 } })
     music_title:set({ label = { width = detail and "dynamic" or 0 } })
   end)
 end
 
+local function parse_result(result)
+  if not result then return nil end
+  local trimmed = result:gsub("\n", ""):gsub("\r", "")
+  if trimmed:match("^playing:") then
+    local parts = {}
+    for part in trimmed:gmatch("([^:]+)") do
+      table.insert(parts, part)
+    end
+    return { artist = parts[2] or "Unknown Artist", title = parts[3] or "Unknown Title" }
+  end
+  return nil
+end
+
 local function update_music()
-  print("[DEBUG] update_music called")
+  -- Consulta app Música
   sbar.exec([[osascript -e 'tell application "Music"
 try
   if player state is playing then
@@ -67,37 +78,46 @@ try
 on error
   return "not_playing"
 end try
-end tell']], function(result)
-    if not result then
-      print("[DEBUG] No result from osascript")
-      return
-    end
-    local trimmed = result:gsub("\n", ""):gsub("\r", "")
-    print("[DEBUG] Music state raw result: '" .. trimmed .. "'")
-
-    if trimmed:match("^playing:") then
-      local parts = {}
-      for part in trimmed:gmatch("([^:]+)") do
-        table.insert(parts, part)
-      end
-
-      local artist = parts[2] or "Unknown Artist"
-      local title = parts[3] or "Unknown Title"
-
-      print(string.format("[DEBUG] Music playing - Artist: '%s', Title: '%s'", artist, title))
-
-      music_artist:set({ drawing = true, label = artist })
-      music_title:set({ drawing = true, label = title })
-
+end tell']], function(music_result)
+    local music_info = parse_result(music_result)
+    if music_info then
+      music_artist:set({ drawing = true, label = music_info.artist })
+      music_title:set({ drawing = true, label = music_info.title })
       animate_music_detail(true)
       interrupt.music = interrupt.music + 100
       sbar.delay(5, function() animate_music_detail(false) end)
-    else
-      print("[DEBUG] Music not playing - hiding widget")
-      music_artist:set({ drawing = false })
-      music_title:set({ drawing = false })
+      return
     end
-  end)
+
+    -- Si Música no reproduce, consulta Spotify
+    sbar.exec([[osascript -e 'tell application "Spotify"
+try
+  if player state is playing then
+    set trackName to name of current track
+    set artistName to artist of current track
+    return "playing:" & artistName & ":" & trackName
+  else
+    return "not_playing"
+  end if
+on error
+  return "not_playing"
+end try
+end tell']], function(spotify_result)
+        local spotify_info = parse_result(spotify_result)
+        if spotify_info then
+          music_artist:set({ drawing = true, label = spotify_info.artist })
+          music_title:set({ drawing = true, label = spotify_info.title })
+          animate_music_detail(true)
+          interrupt.music = interrupt.music + 100
+          sbar.delay(5, function() animate_music_detail(false) end)
+          return
+        end
+
+        -- Si ni Música ni Spotify reproducen, ocultar widget
+        music_artist:set({ drawing = false })
+        music_title:set({ drawing = false })
+    end)
+end)
 end
 
 local function music_timer()
