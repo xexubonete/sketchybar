@@ -122,7 +122,7 @@ end
 
 local function music_timer()
   update_music()
-  sbar.delay(0.5, music_timer)
+  sbar.delay(2, music_timer)
 end
 
 -- Inicia el timer recursivo
