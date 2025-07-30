@@ -312,6 +312,7 @@ return {
 	["Zulip"] = ":zulip:",
 	
 	--Apps in spanish
+	["CHIRP"] = ":arduino:",
 	["Contactos"] = ":messages:",
 	["Perplexity"] = ":openai:",
 	["Utilidad de Discos"] = ":gear:",
