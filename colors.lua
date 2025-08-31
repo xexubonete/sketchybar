@@ -1,3 +1,4 @@
+ -- color real de la barra de macOS en modo oscuro
 return {
   black = 0xff181819,
   white = 0xffe2e2e3,
@@ -9,6 +10,7 @@ return {
   magenta = 0xffb39df3,
   grey = 0xff7f8490,
   transparent = 0x00000000,
+  macos_bar_dark = 0xFF202020,
 
   bar = {
     bg = 0xf02c2e34,
