@@ -312,6 +312,8 @@ return {
 	["Zulip"] = ":zulip:",
 	
 	--Apps in spanish
+	["pgAdmin 4"] = ":android_studio:",
+	["Bruno"] = ":yuque:",
 	["CHIRP"] = ":arduino:",
 	["Contactos"] = ":messages:",
 	["Perplexity"] = ":openai:",
